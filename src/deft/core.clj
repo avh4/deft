@@ -1,6 +1,8 @@
 (ns deft.core
+  (:use [deft drawing])
   (:import
     [javax.swing JButton JComponent JFrame WindowConstants]
+    [java.awt Dimension]
     [java.awt.event ActionListener]))
 
 (defn application [name initial-state & displays]
@@ -33,6 +35,16 @@
                       (.fillRect 0 0 (.getWidth this) (.getHeight this))
                       ))
     ))
+
+(defn CustomComponent [[w h] rendering-fn]
+  (proxy [JComponent] []
+    (paintComponent [g]
+                    (let [w (.getWidth this)
+                          h (.getHeight this)]
+                      (doseq [command (rendering-fn [w h] @S)]
+                        (draw command g)) ))
+      (getPreferredSize [] (Dimension. w h)) ))
+
 
 (defn run [app]
   (let [window (JFrame. (:title app))

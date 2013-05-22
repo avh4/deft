@@ -5,6 +5,7 @@ An experimental API design for functional GUI development.
 ## Example apps
 
     lein run -m deft.examples.static-color
+    lein run -m deft.examples.static-button
 
 ## License
 

@@ -1,5 +1,5 @@
 (ns deft.core
-  (:import [javax.swing JComponent JFrame WindowConstants]))
+  (:import [javax.swing JButton JComponent JFrame WindowConstants]))
 
 (defn application [name & displays]
   {:title name
@@ -7,6 +7,9 @@
 
 (defn display [& widgets]
   widgets)
+
+(defn Button [label]
+  (proxy [JButton] [label]))
 
 (defn Color [color]
   (proxy [JComponent] []

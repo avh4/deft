@@ -4,6 +4,7 @@
 
 (def app
   (application "Static Button"
+    nil
     (display
       (Button "Unclickable Button"))))
 

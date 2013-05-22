@@ -5,6 +5,7 @@
 
 (def app
   (application "Static Color"
+    nil
     (display
       (Color color/red))))
 

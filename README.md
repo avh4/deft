@@ -1,13 +1,13 @@
 # deft
 
-A Clojure library designed to ... well, that part is up to you.
+An experimental API design for functional GUI development.
 
-## Usage
+## Example apps
 
-FIXME
+    lein run -m deft.examples.static-color
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Aaron VonderHaar
 
 Distributed under the Eclipse Public License, the same as Clojure.

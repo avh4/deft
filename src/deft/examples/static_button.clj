@@ -4,9 +4,9 @@
 
 (def app
   (application "Static Button"
-    nil
-    (display
-      (Button "Unclickable Button"))))
+               nil
+               (display
+                 (Button "Unclickable Button"))))
 
 (defn -main []
   (run app))

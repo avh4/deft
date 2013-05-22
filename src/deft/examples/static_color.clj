@@ -5,9 +5,9 @@
 
 (def app
   (application "Static Color"
-    nil
-    (display
-      (Color color/red))))
+               nil
+               (display
+                 (Color color/red))))
 
 (defn -main []
   (run app))

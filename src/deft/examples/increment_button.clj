@@ -14,9 +14,9 @@
 
 (def app
   (application "Increment Button"
-    1
-    (display
-      (Button button-title increment-count))))
+               1
+               (display
+                 (Button button-title increment-count))))
 
 (defn -main []
   (run app))

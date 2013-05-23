@@ -8,6 +8,7 @@ An experimental API design for functional GUI development.
     lein run -m deft.examples.static-button
     lein run -m deft.examples.increment-button
     lein run -m deft.examples.custom-view
+    lein run -m deft.examples.button-grid
 
 ## License
 

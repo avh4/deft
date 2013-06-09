@@ -1,5 +1,5 @@
 (ns deft.examples.static-color
-  (:require [deft [color :as color]])
+  (:require [deft [color-basic :as color]])
   (:use [deft core widgets])
   (:gen-class))
 

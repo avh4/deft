@@ -1,5 +1,5 @@
 (ns deft.examples.static-button
-  (:use [deft core])
+  (:use [deft core widgets])
   (:gen-class))
 
 (def app

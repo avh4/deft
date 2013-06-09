@@ -1,5 +1,6 @@
 (ns deft.examples.custom-view
-  (:use [deft core drawing])
+  (:require [deft [color :as color]])
+  (:use [deft core drawing widgets])
   (:import [javax.swing JComponent])
   (:import [java.awt Dimension])
   (:gen-class))
@@ -7,13 +8,13 @@
 (defn normalize-weights [seq] (map #(/ % (apply + seq)) seq))
 
 (defn chart-values [state] (normalize-weights state))
-(defn chart-colors [state] [(color-rgb 255 0 0) (color-rgb 0 0 255)
-                            (color-rgb 0 255 255) (color-rgb 255 255 0)])
+(defn chart-colors [state] [(color/rgb 255 0 0) (color/rgb 0 0 255)
+                            (color/rgb 0 255 255) (color/rgb 255 255 0)])
 
 (defn chart-rendering [[w h] weights colors]
   (let [y 0]
     (map (fn [weight color left]
-           (fill-rect [(* w (- left weight)) y (* w weight) h] color))
+           (solid-rect [(* w (- left weight)) y (* w weight) h] color))
          weights colors (reductions + weights))
     ))
 

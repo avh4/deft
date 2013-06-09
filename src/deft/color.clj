@@ -1,4 +1,5 @@
-(ns deft.color
-  (:import [java.awt Color]))
+(ns deft.color)
 
-(def red Color/RED)
+(defn rgb [r g b] [r g b])
+
+(def red [255 0 0])

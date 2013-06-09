@@ -1,5 +1,5 @@
 (ns deft.examples.increment-button
-  (:use [deft core])
+  (:use [deft core widgets])
   (:gen-class))
 
 ;;;; In this example, the application state is a single integer.

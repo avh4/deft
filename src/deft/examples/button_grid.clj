@@ -1,5 +1,5 @@
 (ns deft.examples.button-grid
-  (:use [deft core])
+  (:use [deft core widgets])
   (:gen-class))
 
 ;;;; In this example, the application state is an array of integers.

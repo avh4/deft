@@ -1,6 +1,6 @@
 (ns deft.examples.static-color
   (:require [deft [color :as color]])
-  (:use [deft core])
+  (:use [deft core widgets])
   (:gen-class))
 
 (def app

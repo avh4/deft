@@ -1,5 +1,5 @@
 (ns deft-swing.core
-  (:use [deft core])
+  (:use [deft core color])
   (:require [deft-swing color]))
 (import 'java.awt.RenderingHints)
 (import 'java.awt.font.TextLayout)
@@ -20,8 +20,11 @@
       (.getAdvance (TextLayout. string font (.getFontRenderContext gc))))
     }
   ColorService
-  { :load-color (memoize (fn [gc [r g b]]
-      (java.awt.Color. r g b)))
+  { :load-color (memoize (fn [gc deft-color]
+      (let [r (red-value   deft-color)
+            g (green-value deft-color)
+            b (blue-value  deft-color)]
+        (java.awt.Color. r g b))))
     }
   GraphicsContext
   { :prepare (fn [gc]

@@ -14,11 +14,14 @@
 (def ^:private get-color (memoize (fn [r g b]
   (java.awt.Color. r g b))))
 
+(def ^:private get-font (memoize (fn
+  ([font-name pt] (.deriveFont (get-font font-name) (float pt)))
+  ([font-name] (Font/createFont Font/TRUETYPE_FONT (java.io.FileInputStream. (str font-name ".ttf")))))))
+
 (extend java.awt.Graphics2D
   FontService
-  { :load-font (memoize (fn [gc font-name pt]
-      (let [base-font (Font/createFont Font/TRUETYPE_FONT (java.io.FileInputStream. (str font-name ".ttf")))]
-        (.deriveFont base-font (float pt)))))
+  { :load-font (fn [gc font-name pt]
+      (get-font font-name pt))
     :text-width (fn [gc font string]
       (.getAdvance (TextLayout. string font (.getFontRenderContext gc))))
     }

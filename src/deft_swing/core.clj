@@ -1,4 +1,4 @@
-(ns deft.swing
+(ns deft-swing.core
   (:use [deft core]))
 (import 'java.awt.RenderingHints)
 (import 'java.awt.font.TextLayout)

@@ -24,7 +24,7 @@
           (.setText button (label-fn new-state))))
       button )))
 
-(use 'deft.swing)
+(use 'deft-swing.core)
 
 (defn Color [color]
   (new-widget [100 100] (fn [gc w h]

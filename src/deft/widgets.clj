@@ -5,7 +5,7 @@
     [java.awt Dimension GridLayout]
     [java.awt.event ActionListener]))
 
-(def S (atom nil))
+(def ^:private S (atom nil))
 
 (defn- connect-watcher [ref key update-fn]
   (add-watch ref key update-fn)

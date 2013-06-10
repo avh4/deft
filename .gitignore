@@ -1,3 +1,4 @@
+.DS_Store
 /target
 /lib
 /classes
@@ -10,4 +11,3 @@ pom.xml.asc
 .lein-failures
 .lein-plugins
 .lein-repl-history
-.DS_Store

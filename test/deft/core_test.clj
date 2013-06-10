@@ -1,3 +1,3 @@
 (ns deft.core-test
-  (:require [clojure.test :refer :all]
-            [deft.core :refer :all]))
+  (:use [deft.core])
+  (:use [midje.sweet])

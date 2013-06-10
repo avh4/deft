@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/avh4/deft.png?branch=master)](http://travis-ci.org/avh4/deft)
+
 # deft
 
 An experimental API design for functional GUI development.

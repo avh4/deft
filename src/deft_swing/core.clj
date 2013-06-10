@@ -11,6 +11,9 @@
     (paintComponent [gc]
       (render-fn gc (.getWidth this) (.getHeight this))))))
 
+(def ^:private get-color (memoize (fn [r g b]
+  (java.awt.Color. r g b))))
+
 (extend java.awt.Graphics2D
   FontService
   { :load-font (memoize (fn [gc font-name pt]
@@ -20,11 +23,11 @@
       (.getAdvance (TextLayout. string font (.getFontRenderContext gc))))
     }
   ColorService
-  { :load-color (memoize (fn [gc deft-color]
+  { :load-color (fn [gc deft-color]
       (let [r (red-value   deft-color)
             g (green-value deft-color)
             b (blue-value  deft-color)]
-        (java.awt.Color. r g b))))
+        (get-color r g b)))
     }
   GraphicsContext
   { :prepare (fn [gc]

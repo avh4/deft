@@ -1,5 +1,6 @@
 (ns deft-swing.core
-  (:use [deft core]))
+  (:use [deft core])
+  (:require [deft-swing color]))
 (import 'java.awt.RenderingHints)
 (import 'java.awt.font.TextLayout)
 (import 'java.awt.Font)
@@ -40,11 +41,3 @@
       (.setColor gc color)
       (.drawString gc string (float left-x) (float baseline-y)))
     })
-
-(require 'deft.color)
-(extend-type java.awt.Color
-  deft.color/Color
-  (red-value   [this] (.getRed   this))
-  (green-value [this] (.getGreen this))
-  (blue-value  [this] (.getBlue  this))
-  (alpha-value [this] (.getAlpha this)))

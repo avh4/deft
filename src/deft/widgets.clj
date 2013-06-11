@@ -12,6 +12,8 @@
   (update-fn key ref nil @ref))
 
 (defn Button
+  "label-fn [state] -> String
+   on-click-transformation [state] -> new-state"
   ([label] (Button (constantly label) identity))
   ([label-fn on-click-transformation]
     (let [button (proxy [JButton] [])
@@ -22,7 +24,7 @@
       (connect-watcher S button
         (fn [key ref old-state new-state]
           (.setText button (label-fn new-state))))
-      button )))
+      button)))
 
 (use 'deft-swing.core)
 
@@ -31,13 +33,15 @@
     (prepare gc)
     (fill-rect gc [0 0 w h] (load-color gc color)))))
 
-(defn CustomComponent [[w h] rendering-fn]
-  (new-widget [w h] (fn [gc w h]
+(defn CustomComponent [[preferred-width preferred-height] rendering-fn]
+  "rendering-fn [state [w h]] -> seq of rendering commands"
+  (new-widget [preferred-width preferred-height] (fn [gc w h]
     (prepare gc)
-    (doseq [command (rendering-fn [w h] @S)]
+    (doseq [command (rendering-fn @S [w h])]
       (draw command gc)) )))
 
 (defn Grid [cell-fn]
+  "cell-fn [state] -> seq of widgets"
   (let [self (proxy [JComponent] [])]
     (.setLayout self (GridLayout. 0 2))
     (connect-watcher S self

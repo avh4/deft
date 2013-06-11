@@ -5,9 +5,10 @@
 (import 'java.awt.font.TextLayout)
 (import 'java.awt.Font)
 
-(def new-widget (fn [[w h] render-fn]
+(def new-widget (fn [[preferred-width preferred-height] render-fn]
+  "render-fn [gc w h] -> side effects on gc"
   (proxy [javax.swing.JComponent] []
-    (getPreferredSize [] (java.awt.Dimension. w h))
+    (getPreferredSize [] (java.awt.Dimension. preferred-width preferred-height))
     (paintComponent [gc]
       (render-fn gc (.getWidth this) (.getHeight this))))))
 

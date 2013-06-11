@@ -11,15 +11,17 @@
 (defn chart-colors [state] [color/red color/blue
                             color/yellow color/violet])
 
-(defn chart-rendering [[w h] weights colors]
-  (let [y 0]
-    (map (fn [weight color left]
-           (solid-rect [(* w (- left weight)) y (* w weight) h] color))
-         weights colors (reductions + weights))
-    ))
+(defn chart-rendering
+  ([weights-fn colors-fn state [w h]] (chart-rendering (weights-fn state) (colors-fn state) [w h]))
+  ([weights colors [w h]]
+    (let [y 0]
+      (map (fn [weight color left]
+             (solid-rect [(* w (- left weight)) y (* w weight) h] color))
+           weights colors (reductions + weights))
+      )))
 
 (defn BarChart [weights-fn colors-fn]
-  (CustomComponent [400 200] #(chart-rendering %1 (weights-fn %2) (colors-fn %2))))
+  (CustomComponent [400 200] (partial chart-rendering weights-fn colors-fn)))
 
 (def app
   (application "Custom View"

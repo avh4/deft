@@ -16,9 +16,10 @@
 
 (facts "about tick mark placement"
   (fact ""
-    (tick-marks [0 100 10] [0 100]) => [10 20 30 40 50 60 70 80 90 100]
-    (tick-marks [0 100 50] [3 100]) => [53 103]
-    (tick-marks [0 100 51] [0 100]) => [51]))
+    (tick-marks [0 100 10] [  0  100]) => [10 20 30 40 50 60 70 80 90 100]
+    (tick-marks [0 100 10] [100 -100]) => [90 80 70 60 50 40 30 20 10 0]
+    (tick-marks [0 100 50] [  3  100]) => [53 103]
+    (tick-marks [0 100 51] [  0  100]) => [51]))
 
 (facts "about mapping tick ranges"
   (fact ""
@@ -36,7 +37,7 @@
     (chart-y-axis .label. 0 100 10 [3 4 100 100])
       => (contains (solid-rect [3 4 1 100] axis-color)))
   (fact "it has tick marks for each major step"
-    (chart-y-axis .label. ..min.. ..max.. ..step.. [..x.. ..y.. .w. ..h..])
-      => (contains (map #(solid-rect [..x.. % 5 1] axis-color) [49 99]))
+    (chart-y-axis .label. ..min.. ..max.. ..step.. [..x.. 20 .w. 200])
+      => (contains (map #(solid-rect [..x.. % 5 1] axis-color) [50 0]))
     (provided 
-      (tick-marks [..min.. ..max.. ..step..] [..y.. ..h..]) => [50 100])))
+      (tick-marks [..min.. ..max.. ..step..] [220 -200]) => [50 0])))

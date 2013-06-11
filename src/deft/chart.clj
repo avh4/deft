@@ -9,9 +9,10 @@
     [x (- (+ (* max factor) x) min) (* step factor)]))
 
 (defn tick-marks [ticks target]
-  (prn ticks target)
   (let [[min max step] (convert-tick-range ticks target)]
-    (range (+ min step) (inc max) step)))
+    (if (> step 0)
+      (range (+ min step) (inc max) step)
+      (range (+ min step) (dec max) step))))
 
 (defn chart-x-axis [label x-min x-max maj-step [x y w h]]
   (flatten [
@@ -22,8 +23,8 @@
 (defn chart-y-axis [label y-min y-max maj-step [x y w h]]
   (flatten [
     (solid-rect [x y 1 h] axis-color)
-    (map #(solid-rect [x (dec %) 5 1] axis-color)
-      (tick-marks [y-min y-max maj-step] [y h]))]))
+    (map #(solid-rect [x % 5 1] axis-color)
+      (tick-marks [y-min y-max maj-step] [(+ y h) (- h)]))]))
 
 (defn chart-line-plot [[x-min x-max] [y-min y-max] data bounds]
   [])

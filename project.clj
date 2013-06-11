@@ -1,4 +1,4 @@
-(defproject net.avh4.clj/deft "0.3.0-SNAPSHOT"
+(defproject net.avh4.clj/deft "0.4.0-SNAPSHOT"
   :description "An experimental API design for functional GUI development"
   :url "http://github.com/avh4/deft"
   :license {:name "Eclipse Public License"

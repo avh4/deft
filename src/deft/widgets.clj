@@ -1,4 +1,5 @@
 (ns deft.widgets
+  (:require [deft [rect :as rect]])
   (:use [deft core drawing])
   (:import
     [javax.swing JButton JComponent JFrame WindowConstants]
@@ -37,7 +38,7 @@
   "rendering-fn [state [w h]] -> seq of rendering commands"
   (new-widget [preferred-width preferred-height] (fn [gc w h]
     (prepare gc)
-    (doseq [command (rendering-fn @S [w h])]
+    (doseq [command (rendering-fn @S (rect/of-size w h))]
       (draw command gc)) )))
 
 (defn Grid [cell-fn]

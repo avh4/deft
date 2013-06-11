@@ -7,7 +7,7 @@
 
 (def new-widget (fn [[w h] render-fn]
   (proxy [javax.swing.JComponent] []
-    (getPreferredSize [] (java.awt.Dimension. 800 600))
+    (getPreferredSize [] (java.awt.Dimension. w h))
     (paintComponent [gc]
       (render-fn gc (.getWidth this) (.getHeight this))))))
 
@@ -16,7 +16,11 @@
 
 (def ^:private get-font (memoize (fn
   ([font-name pt] (.deriveFont (get-font font-name) (float pt)))
-  ([font-name] (Font/createFont Font/TRUETYPE_FONT (java.io.FileInputStream. (str font-name ".ttf")))))))
+  ([font-name]
+    (try
+      (Font/createFont Font/TRUETYPE_FONT (java.io.FileInputStream. (str font-name ".ttf")))
+      (catch java.io.FileNotFoundException e
+        (Font. font-name 0 0)))))))
 
 (extend-type java.awt.Graphics2D
   FontService
@@ -36,7 +40,7 @@
   (prepare [gc]
     (.setRenderingHints gc
       {RenderingHints/KEY_ANTIALIASING RenderingHints/VALUE_ANTIALIAS_ON
-       RenderingHints/KEY_TEXT_ANTIALIASING RenderingHints/VALUE_TEXT_ANTIALIAS_LCD_HRGB
+       RenderingHints/KEY_TEXT_ANTIALIASING RenderingHints/VALUE_TEXT_ANTIALIAS_DEFAULT
        RenderingHints/KEY_FRACTIONALMETRICS RenderingHints/VALUE_FRACTIONALMETRICS_ON
        }))
   (fill-rect [gc [x y w h] color]
@@ -48,5 +52,4 @@
   (draw-string [gc string left-x baseline-y font color]
     (.setFont gc font)
     (.setColor gc color)
-    (.drawString gc string (float left-x) (float baseline-y)))
-  )
+    (.drawString gc string (float left-x) (float baseline-y))))

@@ -33,6 +33,7 @@
 
 (defn CustomComponent [[w h] rendering-fn]
   (new-widget [w h] (fn [gc w h]
+    (prepare gc)
     (doseq [command (rendering-fn [w h] @S)]
       (draw command gc)) )))
 

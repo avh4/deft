@@ -8,18 +8,11 @@
       => (contains (solid-rect [0 99 100 1] axis-color))
     (chart-x-axis .label. 0 100 10 [10 10 100 100])
       => (contains (solid-rect [10 109 100 1] axis-color)))
-  (facts "about major tick marks"
-    (fact "it has the last tick mark"
-      (chart-x-axis .label. 0 100 10 [0 0 100 100])
-        => (contains (solid-rect [99 95 1 5] axis-color)))
-    (fact "it has a tick mark for each major step"
-      (chart-x-axis .label. 0 100 10 [0 0 100 100])
-        => (contains (map #(solid-rect [% 95 1 5] axis-color)
-          [9 19 29 39 49 59 69 79 89 99])))
-    (fact "it places the tick marks when the chart has an offset"
-      (chart-x-axis .label. 0 100 50 [30 0 100 100])
-        => (contains (map #(solid-rect [% 95 1 5] axis-color) [79 129])))
-    ))
+  (fact "it has tick marks for each major step"
+    (chart-x-axis .label. ..min.. ..max.. ..step.. [..x.. 20 ..w.. 200])
+      => (contains (map #(solid-rect [% (- 220 5) 1 5] axis-color) [49 99]))
+    (provided
+      (tick-marks [..min.. ..max.. ..step..] [..x.. ..w..]) => [50 100])))
 
 (facts "about tick mark placement"
   (fact ""
@@ -43,7 +36,7 @@
     (chart-y-axis .label. 0 100 10 [3 4 100 100])
       => (contains (solid-rect [3 4 1 100] axis-color)))
   (fact "it has tick marks for each major step"
-    (chart-y-axis .label. ..min.. ..max.. ..step.. [.x. ..y.. .w. ..h..])
-      => (contains (map #(solid-rect [0 % 5 1] axis-color) [49 99]))
+    (chart-y-axis .label. ..min.. ..max.. ..step.. [..x.. ..y.. .w. ..h..])
+      => (contains (map #(solid-rect [..x.. % 5 1] axis-color) [49 99]))
     (provided 
       (tick-marks [..min.. ..max.. ..step..] [..y.. ..h..]) => [50 100])))

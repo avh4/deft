@@ -55,11 +55,12 @@
     (.setColor gc color)
     (.drawString gc string (float left-x) (float baseline-y)))
   (draw-line [gc points color]
-    (let [path (java.awt.geom.Path2D$Float.)
-          start (first points)]
-      (.moveTo path (float (first start)) (float (second start)))
-      (doseq [point (rest points)]
-        (.lineTo path (float (first point)) (float (second point))))
-      (.setColor gc color)
-      (.draw gc path)))
+    (.setColor gc color)
+    (loop [ps points]
+      (let [a (first ps)
+            b (second ps)]
+        (if (nil? b) nil
+          (do
+            (.drawLine gc (first a) (second a) (first b) (second b))
+            (recur (rest ps)))))))
   )

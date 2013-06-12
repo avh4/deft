@@ -18,13 +18,13 @@
   (flatten [
     (solid-rect [x (+ y (dec h)) w 1] axis-color)
     (map #(solid-rect [(dec %) (- (+ y h) 5) 1 5] axis-color)
-      (tick-marks [x-min x-max maj-step] [x w]))]))
+      (tick-marks (map float [x-min x-max maj-step]) (map float [x w])))]))
 
 (defn chart-y-axis [label y-min y-max maj-step [x y w h]]
   (flatten [
     (solid-rect [x y 1 h] axis-color)
     (map #(solid-rect [x % 5 1] axis-color)
-      (tick-marks [y-min y-max maj-step] [(+ y h) (- h)]))]))
+      (tick-marks (map float [y-min y-max maj-step]) (map float [(+ y h) (- h)])))]))
 
 (defn normalize-data [data [from-min from-max] [to-min to-max]]
   (let [factor (/ (- to-max to-min) (- from-max from-min))]

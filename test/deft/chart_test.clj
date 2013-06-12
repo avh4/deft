@@ -41,3 +41,20 @@
       => (contains (map #(solid-rect [..x.. % 5 1] axis-color) [50 0]))
     (provided 
       (tick-marks [..min.. ..max.. ..step..] [220 -200]) => [50 0])))
+
+(facts "about line plots"
+  (fact "it draws a line through each data point"
+    (chart-line-plot ..color.. [0 100] [0 100] [[0 0] [2 5] [80 90]] [0 0 100 100])
+      => (contains (line [[0 100] [2 95] [80 10]] ..color..))
+    (chart-line-plot ..color.. [0 100] [0 100] [[0 0] [2 5] [80 90]] [100 100 1000 1000])
+      => (contains (line [[100 1100] [120 1050] [900 200]] ..color..))))
+
+(facts "about normalize-data"
+  (fact "it passes the data through when the to and from range are the same"
+    (normalize-data [0 1 5 10] [ 0 10] [0  10]) => [0 1 5 10])
+  (fact "it scales the data when the ranges have different sizes"
+    (normalize-data [0 1 5 10] [ 0 10] [  0 100]) => [  0  10  50 100]
+    (normalize-data [0 1 5 10] [ 0 10] [100 200]) => [100 110 150 200])
+  (fact "it translates the data when the ranges have different origins"
+    (normalize-data [0 1 5 10] [ 0 10] [10 20]) => [10 11 15 20]
+    (normalize-data [0 1 5 10] [10 20] [20 30]) => [10 11 15 20]))

@@ -26,5 +26,13 @@
     (map #(solid-rect [x % 5 1] axis-color)
       (tick-marks [y-min y-max maj-step] [(+ y h) (- h)]))]))
 
-(defn chart-line-plot [[x-min x-max] [y-min y-max] data bounds]
-  [])
+(defn normalize-data [data [from-min from-max] [to-min to-max]]
+  (let [factor (/ (- to-max to-min) (- from-max from-min))]
+    (map #(+ (* factor %) to-min (- from-min)) data)))
+
+(defn chart-line-plot [color [x-min x-max] [y-min y-max] data [x y w h]]
+  (let [data-xs (map first data)
+        data-ys (map second data)
+        pixel-xs (normalize-data data-xs [x-min x-max] [x (+ w x)])
+        pixel-ys (normalize-data data-ys [y-min y-max] [(+ h y) y])]
+    (line (map vector pixel-xs pixel-ys) color)))

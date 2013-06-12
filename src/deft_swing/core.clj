@@ -53,4 +53,13 @@
   (draw-string [gc string left-x baseline-y font color]
     (.setFont gc font)
     (.setColor gc color)
-    (.drawString gc string (float left-x) (float baseline-y))))
+    (.drawString gc string (float left-x) (float baseline-y)))
+  (draw-line [gc points color]
+    (let [path (java.awt.geom.Path2D$Float.)
+          start (first points)]
+      (.moveTo path (float (first start)) (float (second start)))
+      (doseq [point (rest points)]
+        (.lineTo path (float (first point)) (float (second point))))
+      (.setColor gc color)
+      (.draw gc path)))
+  )

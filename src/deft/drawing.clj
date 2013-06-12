@@ -17,6 +17,9 @@
     :left-x left-x :baseline-y baseline-y
     :color color}) )
 
+(defn line [points color]
+  {:shape :line :color color :points points})
+
 (defmulti draw (fn [s _]
   (cond
     (nil? s) :-null
@@ -29,6 +32,8 @@
   (fill-oval gc [x y w h] (load-color gc color)))
 (defmethod draw :text [{:keys [text font font-size color left-x baseline-y]} gc]
   (draw-string gc text left-x baseline-y (load-font gc font font-size) (load-color gc color)))
+(defmethod draw :line [{:keys [points color]} gc]
+  (draw-line gc points (load-color gc color)))
 (defmethod draw :-seq [s-seq gc]
   (doseq [s s-seq] (draw s gc)))
 (defmethod draw :-null [s _]

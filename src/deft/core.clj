@@ -9,4 +9,5 @@
   (prepare [gc])
   (fill-rect [gc [x y w h] color])
   (fill-oval [gc [x y w h] color])
-  (draw-string [gc string left-x baseline-y font color]))
+  (draw-string [gc string left-x baseline-y font color])
+  (draw-line [gc points color]))

@@ -12,7 +12,7 @@
       [(solid-rect bounds color/base3)
        (chart-x-axis "X value" 0 100 10 chart-bounds)
        (chart-y-axis "Y value" 0 100 10 chart-bounds)
-       (chart-line-plot [0 100] [0 100] data chart-bounds)]
+       (chart-line-plot color/magenta [0 100] [0 100] data chart-bounds)]
     )))
 
 (defn LineChart [data-fn]
@@ -20,7 +20,7 @@
 
 (def app
   (application "Line Chart"
-    [[0 (rand-int 10)] [2 (rand-int 10)] [5 (rand-int 10)] [10 (rand-int 10)]]
+    [[0 (rand-int 100)] [20 (rand-int 100)] [50 (rand-int 100)] [100 (rand-int 100)]]
     (display
       (LineChart chart-values))))
 
